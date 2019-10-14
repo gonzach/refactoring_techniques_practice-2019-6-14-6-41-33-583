@@ -10,9 +10,7 @@ public class OwingPrinter {
 
         Double totalPrice = orders.stream().map(Order::getAmount).reduce(Double::sum).orElse(0.0);
 
-        System.out.println(banner);
-        System.out.println("name: " + name);
-        System.out.println("amount: " + totalPrice);
+        System.out.println(banner + "\r\n" + "name: " + name + "\r\n" + "amount: " + totalPrice);
     }
 }
 
