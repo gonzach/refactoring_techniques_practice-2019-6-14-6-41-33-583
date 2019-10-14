@@ -6,7 +6,10 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class OwingPrinterTest {
@@ -25,7 +28,21 @@ public class OwingPrinterTest {
 
     @Test
     public void printOwing() {
-//        System.out.print("hello");
-//        assertEquals("hello", outContent.toString());
+
+        OwingPrinter owingPrinter = new OwingPrinter();
+        String orderName = "Dunkin Donut";
+        List<Order> priceList = new ArrayList<>();
+        Order price = new Order(35.0);
+        priceList.add(price);
+
+        owingPrinter.printOwing(orderName, priceList);
+
+        String expectedResult = "*****************************\r\n" +
+                                "****** Customer totals ******\r\n" +
+                                "*****************************\r\n" +
+                                "name: Dunkin Donut\r\n" +
+                                "amount: 35.0\r\n";
+
+        assertThat(outContent.toString(), is(expectedResult));
     }
 }
