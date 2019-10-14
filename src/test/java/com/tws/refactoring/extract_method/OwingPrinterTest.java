@@ -1,5 +1,6 @@
 package com.tws.refactoring.extract_method;
 
+import com.tws.refactoring.extract_variable.PriceCalculator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,17 @@ public class OwingPrinterTest {
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
+    }
+
+    @Test
+    public void should_calculate_price() {
+        PriceCalculator priceCalculator = new PriceCalculator();
+        int quantity = 5;
+        int price = 20;
+        double actualResult = priceCalculator.getPrice(quantity, price);
+        double expectedResult = 110.0;
+
+        assertThat(actualResult, is(expectedResult));
     }
 
     @Test
