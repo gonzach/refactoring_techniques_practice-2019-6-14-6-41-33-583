@@ -1,5 +1,6 @@
 package com.tws.refactoring.extract_method;
 
+import com.tws.refactoring.extract_variable.BannerRender;
 import com.tws.refactoring.extract_variable.PriceCalculator;
 import org.junit.After;
 import org.junit.Before;
@@ -25,6 +26,30 @@ public class OwingPrinterTest {
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
+    }
+
+    @Test
+    public void should_check_browser_if_MAC_or_IE() {
+        String platform =  "MAC";
+        String browser = "IE";
+
+        BannerRender bannerRender = new BannerRender();
+        String actualResult = bannerRender.renderBanner(platform, browser);
+        String expectedResult = "IE on Mac?";
+
+        assertThat(actualResult, is(expectedResult));
+    }
+
+    @Test
+    public void should_check_banner() {
+        String platform =  "IE";
+        String browser = "MAC";
+
+        BannerRender bannerRender = new BannerRender();
+        String actualResult = bannerRender.renderBanner(platform, browser);
+        String expectedResult = "banner";
+
+        assertThat(actualResult, is(expectedResult));
     }
 
     @Test
